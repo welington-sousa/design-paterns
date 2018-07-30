@@ -5,11 +5,13 @@ import aula1.Orcamento;
 public class CalculadorDeDescontos {
 
 	public double calcula(Orcamento orcamento) {
-		double desconto = new DescontoPorCincoItens().desconta(orcamento);
-		if (desconto == 0)
-			desconto = new DescontoPorMaisDeQuinhetosReais().desconta(orcamento);
+		Desconto d1 = new DescontoPorCincoItens();
+		Desconto d2 = new DescontoPorMaisDeQuinhetosReais();
+		Desconto d3 = new SemDesconto();
 
-		// caso contrário, não há desconto
-		return 0;
+		d1.setProximo(d2);
+		d2.setProximo(d3);
+
+		return d1.desconta(orcamento);
 	}
 }
